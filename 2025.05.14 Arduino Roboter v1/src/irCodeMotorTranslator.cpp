@@ -10,13 +10,12 @@ void setupIrCMT()
 
 void irCodeMotorTranslator() 
 {
-  for (int i = 0; i < 5; i++) 
-  {
+
     if (IrReceiver.decode())
     {
       Serial.println(IrReceiver.decodedIRData.command, DEC);
       IrReceiver.resume();
-      
+
       update = true;
       aktuelleZeit = millis();
 
@@ -57,7 +56,7 @@ void irCodeMotorTranslator()
       }
     }
   }
-}
+
 
 
 
