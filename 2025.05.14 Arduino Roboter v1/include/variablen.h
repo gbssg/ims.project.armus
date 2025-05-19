@@ -4,8 +4,8 @@
 extern int richtungl;
 extern int richtungr;
 
-extern long aktuelleZeit;
+extern long lastCommandTime;
 
-extern bool update;
+extern bool driveStateChanged;
 
 #endif

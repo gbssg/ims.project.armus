@@ -16,8 +16,8 @@ void irCodeMotorTranslator()
       Serial.println(IrReceiver.decodedIRData.command, DEC);
       IrReceiver.resume();
 
-      update = true;
-      aktuelleZeit = millis();
+      driveStateChanged = true;
+      lastCommandTime = millis();
 
       switch (IrReceiver.decodedIRData.command) 
       {
@@ -50,9 +50,9 @@ void irCodeMotorTranslator()
 
       if (IrReceiver.decodedIRData.flags & IRDATA_FLAGS_IS_REPEAT)
       {
-        update = true;
-        Serial.println("aa");
-        aktuelleZeit = millis();
+        driveStateChanged = true;
+        Serial.println("Wiederholung vom IR Code");
+        lastCommandTime = millis();
       }
     }
   }

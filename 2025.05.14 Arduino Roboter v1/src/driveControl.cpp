@@ -1,14 +1,14 @@
 #include <Arduino.h>
 #include "variablen.h"
 
-int left_ctrl_forward = 2;
-int right_ctrl_forward = 4;
+const int left_ctrl_forward = 2;
+const int right_ctrl_forward = 4;
 
-int left_pwm = 5;
-int right_pwm = 6;
+const int left_pwm = 5;
+const int right_pwm = 6;
 
-int speedv = 105; 
-int speedr = 150; 
+const int speedv = 105; 
+const int speedr = 150; 
 
 void setupDC() 
 {
@@ -20,15 +20,15 @@ void setupDC()
 
 void driveControl(int rl, int rr)
 {
-    Serial.println(millis() - aktuelleZeit);
-    Serial.println(aktuelleZeit);
-    if (millis() - aktuelleZeit > 200) 
+    Serial.println(millis() - lastCommandTime);
+    Serial.println(lastCommandTime);
+    if (millis() - lastCommandTime > 200) 
     {
         rl = 0;
         rr = 0;
-        update = true;
+        driveStateChanged = true;
     }
-    if (update)
+    if (driveStateChanged)
     {
         
         switch (rl) 
@@ -62,6 +62,6 @@ void driveControl(int rl, int rr)
                 analogWrite(right_pwm, 0);
                 break;
         }
-        update = false;
+        driveStateChanged = false;
     }
 }

@@ -1,7 +1,7 @@
 int richtungl = 0;
 int richtungr = 0;
 
-bool update = false;
+bool driveStateChanged = false;
 
-long aktuelleZeit = 0;
+unsigned long lastCommandTime = 0;
 
