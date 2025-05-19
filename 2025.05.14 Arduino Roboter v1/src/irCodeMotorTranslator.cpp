@@ -14,9 +14,10 @@ void irCodeMotorTranslator()
   {
     if (IrReceiver.decode())
     {
-      update = true;
       Serial.println(IrReceiver.decodedIRData.command, DEC);
       IrReceiver.resume();
+      
+      update = true;
       aktuelleZeit = millis();
 
       switch (IrReceiver.decodedIRData.command) 
@@ -25,7 +26,6 @@ void irCodeMotorTranslator()
           // Beide Seiten vorwärts
           richtungl = 1;
           richtungr = 1;
-          aktuelleZeit = millis();
           break;
         case 67:
           // Linke Seite vorwärts, rechte Seite rückwärts (Rechtsdrehung)
@@ -52,7 +52,7 @@ void irCodeMotorTranslator()
       if (IrReceiver.decodedIRData.flags & IRDATA_FLAGS_IS_REPEAT)
       {
         update = true;
-        Serial.print("aaaaaaaaaaaaaaaaaaaaaaa");
+        Serial.println("aa");
         aktuelleZeit = millis();
       }
     }

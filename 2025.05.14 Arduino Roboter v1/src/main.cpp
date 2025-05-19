@@ -14,5 +14,5 @@ void loop()
 {
   irCodeMotorTranslator();
   driveControl(richtungl, richtungr);
-  delay(1000);
+  delay(5);
 }
