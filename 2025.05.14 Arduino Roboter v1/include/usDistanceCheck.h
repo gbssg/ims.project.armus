@@ -1,11 +1,8 @@
-#ifndef VARIABLEN_H
-#define VARIABLEN_H
+#ifndef US_DISTANCE_CHECK_H
+#define US_DISTANCE_CHECK_H
 
-extern int richtungl;
-extern int richtungr;
+#include "variablen.h"
 
-extern long lastCommandTime;
-
-extern bool driveStateChanged;
-
+void setupUS();
+void usDistanceCheck();
 #endif

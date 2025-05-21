@@ -1,7 +1,39 @@
-int richtungl = 0;
-int richtungr = 0;
+#include <Arduino.h>
+#include <variablen.h>
+#include "driveControl.h"
 
-bool driveStateChanged = false;
+#define TRIG_PIN 12
+#define ECHO_PIN 13
 
-unsigned long lastCommandTime = 0;
+long duration;
+float distance;
 
+void setupUS()
+{
+    pinMode(TRIG_PIN, OUTPUT);
+    pinMode(ECHO_PIN, INPUT);
+}
+
+void usDistanceCheck()
+{
+    digitalWrite(TRIG_PIN, LOW);
+    delayMicroseconds(2);
+    digitalWrite(TRIG_PIN, HIGH);
+    delayMicroseconds(10);
+    digitalWrite(TRIG_PIN, LOW);
+
+    duration = pulseIn(ECHO_PIN, HIGH);
+
+    distance = (duration * 0.0343) / 2;
+
+    Serial.println(distance);
+
+    if (distance < 10)
+    {
+        richtungl = -1;
+        richtungr = -1;   
+        lastCommandTime = millis();
+        driveStateChanged = true;
+    }
+
+}
