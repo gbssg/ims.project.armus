@@ -30,7 +30,6 @@ void driveControl(int rl, int rr)
     }
     if (driveStateChanged)
     {
-        
         switch (rl) 
         {
             case 1:

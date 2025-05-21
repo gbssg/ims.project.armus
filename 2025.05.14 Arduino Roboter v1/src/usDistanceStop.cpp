@@ -35,5 +35,4 @@ void usDistanceCheck()
         lastCommandTime = millis();
         driveStateChanged = true;
     }
-
 }

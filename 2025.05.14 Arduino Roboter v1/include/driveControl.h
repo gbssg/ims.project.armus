@@ -3,7 +3,6 @@
 
 #include "variablen.h"
 
-
 void setupDC();
 void driveControl(int rl, int rr);
 #endif

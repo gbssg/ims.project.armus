@@ -1,8 +1,8 @@
 #include <Arduino.h>
 #include "driveControl.h"
 #include "irCodeMotorTranslator.h"
+#include "usDistanceStop.h"
 #include "variablen.h"
-#include "usDistanceCheck.h"
 
 void setup() 
 {
