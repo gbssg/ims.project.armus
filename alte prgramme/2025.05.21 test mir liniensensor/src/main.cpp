@@ -10,8 +10,8 @@ const int right_ctrl_forward = 4;
 const int left_pwm = 5;
 const int right_pwm = 6;
 
-const int speedv = 105; 
-const int speedr = 150; 
+const int speedv = 180; // original value: 105 
+const int speedr = 190; //original value 150
 
 void setup() 
 {
@@ -33,23 +33,7 @@ void loop()
     Serial.print(digitalRead(linier));
     Serial.println();
 
-    if (digitalRead(liniel) == 1)
-    {
-        digitalWrite(left_ctrl_forward, HIGH);
-        analogWrite(left_pwm, speedv);
-
-        digitalWrite(right_ctrl_forward, LOW);
-        analogWrite(left_pwm, 0);
-    }
-    else if (digitalRead(linier) == 1)
-    {
-        digitalWrite(right_ctrl_forward, HIGH);
-        analogWrite(left_pwm, speedv);
-
-        digitalWrite(left_ctrl_forward, LOW);
-        analogWrite(left_pwm, 0);
-    }
-    else
+    if (digitalRead(liniel) + digitalRead(liniem) + digitalRead(linier) == 3)
     {
         digitalWrite(left_ctrl_forward, HIGH);
         analogWrite(left_pwm, speedv);
@@ -57,6 +41,63 @@ void loop()
         digitalWrite(right_ctrl_forward, HIGH);
         analogWrite(right_pwm, speedv);
     }
+    else if (digitalRead(liniel) + digitalRead(liniem) == 2)
+    {
+        digitalWrite(right_ctrl_forward, HIGH);
+        analogWrite(right_pwm, speedv);
+
+        digitalWrite(left_ctrl_forward, LOW);
+        analogWrite(left_pwm, speedr);
+    }
+    else if (digitalRead(linier) + digitalRead(liniem) == 2)
+    {
+        digitalWrite(right_ctrl_forward, LOW);
+        analogWrite(right_pwm, speedr);
+
+        digitalWrite(left_ctrl_forward, HIGH);
+        analogWrite(left_pwm, speedv);
+    }
+    else
+    {
+        digitalWrite(left_ctrl_forward, LOW);
+        analogWrite(left_pwm, 0);
+
+        digitalWrite(right_ctrl_forward, HIGH);
+        analogWrite(right_pwm, speedv);
+    }
+
+
+
+
 
 
 }
+
+    // if (digitalRead(liniel) == 0)
+    // {
+    //     digitalWrite(left_ctrl_forward, HIGH);
+    //     analogWrite(left_pwm, speedv);
+
+    //     digitalWrite(right_ctrl_forward, LOW);
+    //     analogWrite(right_pwm, 0);
+    // }
+    // else if (digitalRead(linier) == 0)
+    // {
+    //     digitalWrite(right_ctrl_forward, HIGH);
+    //     analogWrite(right_pwm, speedv);
+
+    //     digitalWrite(left_ctrl_forward, LOW);
+    //     analogWrite(left_pwm, 0);
+    // }
+    // else
+    // {
+    //     digitalWrite(left_ctrl_forward, LOW);
+    //     analogWrite(left_pwm, 0);
+
+    //     digitalWrite(right_ctrl_forward, LOW);
+    //     analogWrite(right_pwm, 0);
+    // }
+
+
+
+
