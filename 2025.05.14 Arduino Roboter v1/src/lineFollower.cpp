@@ -80,11 +80,6 @@ void lineFollower()
     val_M = digitalRead(pin_M);
     val_R = digitalRead(pin_R);
 
-    Serial.print(digitalRead(val_L));
-    Serial.print(digitalRead(val_M));
-    Serial.print(digitalRead(val_R));
-    Serial.println();
-
     if (val_M == 1)
     {
         if (val_L == 1 && val_R == 0)
@@ -114,23 +109,11 @@ void lineFollower()
         {
             if (last_Turn == 1)
             {
-                // while (val_L + val_M + val_R < 1) // temorary disalbed for testing
-                // {
-                //     val_L = digitalRead(pin_L);
-                //     val_M = digitalRead(pin_M);
-                //     val_R = digitalRead(pin_R);
-                //     left();
-                // }
+                left();  
             }
             else if (last_Turn == 2)
             {
-                // while (val_L + val_M + val_R < 1)
-                // {
-                //     val_L = digitalRead(pin_L);
-                //     val_M = digitalRead(pin_M);
-                //     val_R = digitalRead(pin_R);
-                //     right();
-                // }
+                right();
             }
             else
             {

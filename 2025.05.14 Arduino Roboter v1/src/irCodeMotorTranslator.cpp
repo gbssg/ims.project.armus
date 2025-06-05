@@ -4,6 +4,8 @@
 
 #define LEDPIN 9  
 
+int letzerModusWechsel = millis();
+
 void setupIrCMT()
 {
   IrReceiver.begin(3, ENABLE_LED_FEEDBACK);
@@ -45,10 +47,13 @@ void irCodeMotorTranslator()
         richtungr = -1;
         break;
       case 66:
-        motorEnabled = !motorEnabled; // ändert den Motorstatus
-        digitalWrite(LEDPIN, !motorEnabled); 
-        delay(100); // kurze pause das die LED nicht blickt, wenn man die taste zu lange gedrückt hat
-        break;
+        if (millis() - letzerModusWechsel > 300)
+        {
+          motorEnabled = !motorEnabled; // ändert den Motorstatus
+          digitalWrite(LEDPIN, !motorEnabled); 
+          letzerModusWechsel = millis();
+          break;
+        }
       default:
         // Stop
         richtungl = 0;
