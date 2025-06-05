@@ -2,15 +2,20 @@
 #include <IRremote.h>
 #include "variablen.h"
 
+#define LEDPIN 9  
+
 void setupIrCMT()
 {
   IrReceiver.begin(3, ENABLE_LED_FEEDBACK);
+  pinMode(LEDPIN, OUTPUT);
+  digitalWrite(LEDPIN, LOW); 
 }
 
 void irCodeMotorTranslator() 
 {
   if (IrReceiver.decode())
   {
+    Serial.print("                   ");
     Serial.println(IrReceiver.decodedIRData.command, DEC);
     IrReceiver.resume();
 
@@ -38,6 +43,11 @@ void irCodeMotorTranslator()
         // Beide Seiten rückwärts
         richtungl = -1;
         richtungr = -1;
+        break;
+      case 66:
+        motorEnabled = !motorEnabled; // ändert den Motorstatus
+        digitalWrite(LEDPIN, !motorEnabled); 
+        delay(100); // kurze pause das die LED nicht blickt, wenn man die taste zu lange gedrückt hat
         break;
       default:
         // Stop

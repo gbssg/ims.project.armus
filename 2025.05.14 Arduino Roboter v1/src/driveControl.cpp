@@ -28,39 +28,42 @@ void driveControl(int rl, int rr)
         rr = 0;
         driveStateChanged = true;
     }
-    if (driveStateChanged)
+    if (motorEnabled)
     {
-        switch (rl) 
+        if (driveStateChanged)
         {
-            case 1:
-                digitalWrite(left_ctrl_forward, HIGH);
-                analogWrite(left_pwm, speedv);
-                break;
-            case -1:
-                digitalWrite(left_ctrl_forward, LOW);
-                analogWrite(left_pwm, speedr);
-                break;
-            case 0:
-                digitalWrite(left_ctrl_forward, LOW);
-                analogWrite(left_pwm, 0);
-                break;
-        }
+            switch (rl) 
+            {
+                case 1:
+                    digitalWrite(left_ctrl_forward, HIGH);
+                    analogWrite(left_pwm, speedv);
+                    break;
+                case -1:
+                    digitalWrite(left_ctrl_forward, LOW);
+                    analogWrite(left_pwm, speedr);
+                    break;
+                case 0:
+                    digitalWrite(left_ctrl_forward, LOW);
+                    analogWrite(left_pwm, 0);
+                    break;
+            }
 
-        switch (rr) 
-        {
-            case 1:
-                digitalWrite(right_ctrl_forward, HIGH);
-                analogWrite(right_pwm, speedv);
-                break;
-            case -1:
-                digitalWrite(right_ctrl_forward, LOW);
-                analogWrite(right_pwm, speedr);
-                break;
-            case 0:
-                digitalWrite(right_ctrl_forward, LOW);
-                analogWrite(right_pwm, 0);
-                break;
+            switch (rr) 
+            {
+                case 1:
+                    digitalWrite(right_ctrl_forward, HIGH);
+                    analogWrite(right_pwm, speedv);
+                    break;
+                case -1:
+                    digitalWrite(right_ctrl_forward, LOW);
+                    analogWrite(right_pwm, speedr);
+                    break;
+                case 0:
+                    digitalWrite(right_ctrl_forward, LOW);
+                    analogWrite(right_pwm, 0);
+                    break;
+            }
+            driveStateChanged = false;
         }
-        driveStateChanged = false;
     }
 }

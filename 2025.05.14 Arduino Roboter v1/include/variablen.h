@@ -8,4 +8,6 @@ extern long lastCommandTime;
 
 extern bool driveStateChanged;
 
+extern bool motorEnabled;
+
 #endif

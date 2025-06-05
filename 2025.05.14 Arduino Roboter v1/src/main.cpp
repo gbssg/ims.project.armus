@@ -3,6 +3,7 @@
 #include "irCodeMotorTranslator.h"
 #include "usDistanceStop.h"
 #include "variablen.h"
+#include "lineFollower.h"
 
 void setup() 
 {
@@ -10,6 +11,7 @@ void setup()
   setupIrCMT();
   setupDC();
   setupUS();
+  setupLF();
 }
 
 void loop() 
@@ -17,5 +19,6 @@ void loop()
   irCodeMotorTranslator();
   usDistanceCheck();
   driveControl(richtungl, richtungr);
+  lineFollower();
   delay(5);
 }
