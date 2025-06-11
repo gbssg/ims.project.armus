@@ -15,10 +15,10 @@ const int speedv = 155; // original value: 105
 const int speedr = 100; //original value 150
 
 int val_L;
-int val_M;  
+int val_M; 
 int val_R;
 
-int last_Turn = 1; // 1 = left, 2 = right 
+int last_Turn = 1; // 1 = left, 2 = right. At the start defined as left so that it will turn in some direction if it never was on the line before
 
 void left()
 {
@@ -27,7 +27,6 @@ void left()
 
     digitalWrite(right_ctrl_forward, HIGH);
     analogWrite(right_pwm, speedv);
-
     last_Turn = 1;
 }
 
@@ -79,11 +78,11 @@ void lineFollower()
         {
             right();
         }
-        else if (val_L + val_M + val_R == 3)
+        else if (val_L + val_M + val_R == 3) //wenn alle Sensoren auf der Linie sind, fährt er geradeaus
         {
             front();
         }
-        else
+        else // wenn kein Sensor mehr auf der Linie ist, versucht er hiermit wieder die Linie zu finden
         {
             if (last_Turn == 1)
             {
