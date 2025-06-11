@@ -30,9 +30,6 @@ void setup()
     pinMode(left_pwm, OUTPUT);
     pinMode(right_pwm, OUTPUT);
     Serial.println("Setup complete");
-    Serial.print(digitalRead(val_L));
-    Serial.print(digitalRead(val_M));
-    Serial.print(digitalRead(val_R));
 }
 
 void left()
@@ -76,7 +73,6 @@ void stop()
 
 void loop() 
 { 
-    delay(10);
     val_L = digitalRead(pin_L);
     val_M = digitalRead(pin_M);
     val_R = digitalRead(pin_R);
