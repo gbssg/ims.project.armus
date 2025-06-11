@@ -46,14 +46,15 @@ void irCodeMotorTranslator()
         richtungl = -1;
         richtungr = -1;
         break;
-      case 66:
-        if (millis() - letzerModusWechsel > 300)
+      case 66: // ir code for the * button the remote
+        if (millis() - letzerModusWechsel > 500)
         {
           motorEnabled = !motorEnabled; // ändert den Motorstatus
           digitalWrite(LEDPIN, !motorEnabled); 
           letzerModusWechsel = millis();
           break;
         }
+      // ir code for the "#" button on the remote : 74
       default:
         // Stop
         richtungl = 0;

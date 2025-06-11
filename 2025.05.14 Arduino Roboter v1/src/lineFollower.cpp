@@ -18,7 +18,7 @@ int val_L;
 int val_M;  
 int val_R;
 
-int last_Turn = 0; // 0 = start position, 1 = left, 2 = right
+int last_Turn = 1; // 1 = left, 2 = right 
 
 void left()
 {
@@ -50,16 +50,7 @@ void front()
     analogWrite(right_pwm, speedv);
 }
 
-void stop()
-{
-    digitalWrite(left_ctrl_forward, LOW);
-    analogWrite(left_pwm, 0);
-
-    digitalWrite(right_ctrl_forward, LOW);
-    analogWrite(right_pwm, 0);
-}
-
-void setupLF() 
+void setupLF()    
 {
     pinMode(pin_L, INPUT);
     pinMode(pin_M, INPUT);
@@ -76,12 +67,10 @@ void lineFollower()
 {
     if (!motorEnabled) // Ich verwende dieselbe Variable wie in driveControl weil linefollower und drivecontrol nicht gleichzeitig laufen sollen
     {
-    val_L = digitalRead(pin_L);
-    val_M = digitalRead(pin_M);
-    val_R = digitalRead(pin_R);
+        val_L = digitalRead(pin_L);
+        val_M = digitalRead(pin_M);
+        val_R = digitalRead(pin_R);
 
-    if (val_M == 1)
-    {
         if (val_L == 1 && val_R == 0)
         {
             left();
@@ -90,36 +79,20 @@ void lineFollower()
         {
             right();
         }
-        else
+        else if (val_L + val_M + val_R == 3)
         {
             front();
-        }
-    }
-    else
-    {
-        if (val_L == 1 && val_R == 0)
-        {
-            left();
-        }
-        else if(val_L == 0 && val_R == 1)
-        {
-            right();
         }
         else
         {
             if (last_Turn == 1)
             {
-                left();  
+                left();
             }
             else if (last_Turn == 2)
             {
                 right();
             }
-            else
-            {
-                stop();
-            }
         }
-    }
     }
 }
