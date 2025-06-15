@@ -46,7 +46,9 @@ void irCodeMotorTranslator()
         richtungl = -1;
         richtungr = -1;
         break;
-      case 66: // ir code for the * button the remote
+      case 66: 
+      // ir code for the * button the remote
+      // have to change the system that tells eatch file on when to run
         if (millis() - letzerModusWechsel > 500)
         {
           motorEnabled = !motorEnabled; // ändert den Motorstatus
