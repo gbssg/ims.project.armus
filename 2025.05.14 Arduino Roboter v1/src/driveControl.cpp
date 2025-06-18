@@ -20,15 +20,15 @@ void setupDC()
 
 void driveControl(int rl, int rr)
 {
-    Serial.println(millis() - lastCommandTime);
-    Serial.println(lastCommandTime);
+    // Serial.println(millis() - lastCommandTime);
+    // Serial.println(lastCommandTime);
     if (millis() - lastCommandTime > 200) 
     {
         rl = 0;
         rr = 0;
         driveStateChanged = true;
     }
-    if (motorEnabled)
+    if (motorEnabled && !sonarEnabled)
     {
         if (driveStateChanged)
         {

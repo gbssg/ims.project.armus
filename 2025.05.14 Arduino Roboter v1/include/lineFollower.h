@@ -3,5 +3,6 @@
 
 void setupLF();
 void lineFollower();
+void stop();
 
 #endif

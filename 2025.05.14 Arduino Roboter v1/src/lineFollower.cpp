@@ -1,5 +1,6 @@
 #include <Arduino.h>
 #include "variablen.h"
+#include "usDistanceStop.h"
 
 #define pin_L 11
 #define pin_M 7
@@ -49,6 +50,15 @@ void front()
     analogWrite(right_pwm, speedv);
 }
 
+void stop()
+{
+    digitalWrite(left_ctrl_forward, LOW);
+    analogWrite(left_pwm, 0);
+
+    digitalWrite(right_ctrl_forward, LOW);
+    analogWrite(right_pwm, 0);
+}
+
 void setupLF()    
 {
     pinMode(pin_L, INPUT);
@@ -64,13 +74,15 @@ void setupLF()
 
 void lineFollower()
 {
-    if (!motorEnabled) // Ich verwende dieselbe Variable wie in driveControl weil linefollower und drivecontrol nicht gleichzeitig laufen sollen
+    if (!motorEnabled && !sonarEnabled) // Ich verwende dieselbe Variable wie in driveControl weil linefollower und drivecontrol nicht gleichzeitig laufen sollen
     {
         val_L = digitalRead(pin_L);
         val_M = digitalRead(pin_M);
         val_R = digitalRead(pin_R);
-
-        if (val_L == 1 && val_R == 0)
+        Serial.println(distance);
+        if (distance >= 10)
+        {
+            if (val_L == 1 && val_R == 0)
         {
             left();
         }
@@ -93,5 +105,13 @@ void lineFollower()
                 right();
             }
         }
+            
+        }
+        else
+        {
+            stop();
+        }
+
+        
     }
 }

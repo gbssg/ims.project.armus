@@ -1,10 +1,12 @@
 #include <Arduino.h>
 #include <IRremote.h>
 #include "variablen.h"
+// #include "lineFollower.h"
 
 #define LEDPIN 9  
 
-int letzerModusWechsel = millis();
+int letzerModusWechsel66 = millis();
+int letzerModusWechsel74 = millis();
 
 void setupIrCMT()
 {
@@ -23,6 +25,7 @@ void irCodeMotorTranslator()
 
     driveStateChanged = true;
     lastCommandTime = millis();
+    Serial.println(letzerModusWechsel66);
 
     switch (IrReceiver.decodedIRData.command) 
     {
@@ -49,14 +52,24 @@ void irCodeMotorTranslator()
       case 66: 
       // ir code for the * button the remote
       // have to change the system that tells eatch file on when to run
-        if (millis() - letzerModusWechsel > 500)
+        if (millis() - letzerModusWechsel66 > 500)
         {
+          sonarEnabled = false;
           motorEnabled = !motorEnabled; // ändert den Motorstatus
           digitalWrite(LEDPIN, !motorEnabled); 
-          letzerModusWechsel = millis();
-          break;
+          letzerModusWechsel66 = millis();
         }
-      // ir code for the "#" button on the remote : 74
+        break;
+      // case 74: // ir code for the "#" button on the remote : 74
+      // if (millis() - letzerModusWechsel74 > 500)
+      //   {
+      //     stop();
+      //     motorEnabled = false;
+      //     sonarEnabled = !sonarEnabled; // ändert den Sonarstatus
+      //     digitalWrite(LEDPIN, sonarEnabled); 
+      //     letzerModusWechsel74 = millis();
+      //   }
+      //  break;
       default:
         // Stop
         richtungl = 0;

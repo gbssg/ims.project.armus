@@ -16,24 +16,25 @@ void setupUS()
 
 void usDistanceCheck()
 {
-    if (motorEnabled) // wird im linefollowermodus auch deaktiviert damit die linie nicht verlassen wird
+
+    // Serial.println("Ultrasonic distance check");
+    // Serial.println(millis() - lastCommandTime);
+    // Serial.println(lastCommandTime);
+    
+    digitalWrite(TRIG_PIN, LOW);
+    delayMicroseconds(2);
+    digitalWrite(TRIG_PIN, HIGH);
+    delayMicroseconds(10);
+    digitalWrite(TRIG_PIN, LOW);
+
+    duration = pulseIn(ECHO_PIN, HIGH);
+
+    distance = (duration * 0.0343) / 2;
+
+    // Serial.println(distance);
+
+    if (motorEnabled)
     {
-        Serial.println("Ultrasonic distance check");
-        Serial.println(millis() - lastCommandTime);
-        Serial.println(lastCommandTime);
-        
-        digitalWrite(TRIG_PIN, LOW);
-        delayMicroseconds(2);
-        digitalWrite(TRIG_PIN, HIGH);
-        delayMicroseconds(10);
-        digitalWrite(TRIG_PIN, LOW);
-
-        duration = pulseIn(ECHO_PIN, HIGH);
-
-        distance = (duration * 0.0343) / 2;
-
-        Serial.println(distance);
-
         if (distance < 10)
         {
             richtungl = -1;
@@ -42,4 +43,5 @@ void usDistanceCheck()
             driveStateChanged = true;
         }
     }
+    
 }

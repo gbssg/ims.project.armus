@@ -13,7 +13,6 @@ int distance;
 
 int lastServoPosition;
 
-
 char sonarData [10][20];
 
 void clearArray()
@@ -42,7 +41,7 @@ void USRead()
   {
     distance = distance + 1;
   }
-  if (distance > 40)
+  if (distance >= 40)
   {
     distance = 38; // Limits the distance to 40 cm
   }
@@ -86,7 +85,6 @@ void setup()
   delay(100);
   clearArray();
   displayArrays();
-  
 }
 
 void loop()
@@ -102,9 +100,7 @@ void loop()
     sonarData[i][distance / 2] = 'X';
     sonarData[i][distance / 2 + 1] = 'X';
     displayArrays();
-    Serial.println(lastServoPosition);
     lastServoPosition += 18;
-    Serial.println(lastServoPosition);
     servo.write(lastServoPosition);
     delay(2000);
   }

@@ -14,7 +14,7 @@ void setup()
   setupLF();
 }
 
-void loop() 
+void loop()
 {
   irCodeMotorTranslator();
   usDistanceCheck();

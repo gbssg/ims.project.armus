@@ -5,4 +5,6 @@
 
 void setupUS();
 void usDistanceCheck();
+
+extern float distance;
 #endif
