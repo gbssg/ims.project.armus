@@ -16,11 +16,6 @@ void setupUS()
 
 void usDistanceCheck()
 {
-
-    // Serial.println("Ultrasonic distance check");
-    // Serial.println(millis() - lastCommandTime);
-    // Serial.println(lastCommandTime);
-    
     digitalWrite(TRIG_PIN, LOW);
     delayMicroseconds(2);
     digitalWrite(TRIG_PIN, HIGH);
@@ -31,17 +26,14 @@ void usDistanceCheck()
 
     distance = (duration * 0.0343) / 2;
 
-    // Serial.println(distance);
-
     if (motorEnabled)
     {
-        if (distance < 10)
+        if (distance < 5)
         {
             richtungl = -1;
-            richtungr = -1;   
+            richtungr = -1;
             lastCommandTime = millis();
             driveStateChanged = true;
         }
-    }
-    
+    } 
 }

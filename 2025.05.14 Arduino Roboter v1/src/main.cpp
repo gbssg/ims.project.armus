@@ -7,18 +7,18 @@
 
 void setup() 
 {
-  Serial.begin(9600);
-  setupIrCMT();
-  setupDC();
-  setupUS();
-  setupLF();
+    Serial.begin(9600);
+    setupIrCMT();
+    setupDC();
+    setupUS();
+    setupLF();
 }
 
 void loop()
 {
-  irCodeMotorTranslator();
-  usDistanceCheck();
-  driveControl(richtungl, richtungr);
-  lineFollower();
-  delay(5);
+    irCodeMotorTranslator();
+    usDistanceCheck();
+    driveControl(richtungl, richtungr);
+    lineFollower();
+    delay(5);
 }

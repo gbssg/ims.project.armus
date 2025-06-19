@@ -20,50 +20,49 @@ void setupDC()
 
 void driveControl(int rl, int rr)
 {
-    // Serial.println(millis() - lastCommandTime);
-    // Serial.println(lastCommandTime);
     if (millis() - lastCommandTime > 200) 
     {
         rl = 0;
         rr = 0;
         driveStateChanged = true;
     }
-    if (motorEnabled && !sonarEnabled)
-    {
-        if (driveStateChanged)
-        {
-            switch (rl) 
-            {
-                case 1:
-                    digitalWrite(left_ctrl_forward, HIGH);
-                    analogWrite(left_pwm, speedv);
-                    break;
-                case -1:
-                    digitalWrite(left_ctrl_forward, LOW);
-                    analogWrite(left_pwm, speedr);
-                    break;
-                case 0:
-                    digitalWrite(left_ctrl_forward, LOW);
-                    analogWrite(left_pwm, 0);
-                    break;
-            }
 
-            switch (rr) 
-            {
-                case 1:
-                    digitalWrite(right_ctrl_forward, HIGH);
-                    analogWrite(right_pwm, speedv);
-                    break;
-                case -1:
-                    digitalWrite(right_ctrl_forward, LOW);
-                    analogWrite(right_pwm, speedr);
-                    break;
-                case 0:
-                    digitalWrite(right_ctrl_forward, LOW);
-                    analogWrite(right_pwm, 0);
-                    break;
-            }
-            driveStateChanged = false;
+    if (motorEnabled  && driveStateChanged)
+    {
+
+        switch (rl) 
+        {
+            case 1:
+                digitalWrite(left_ctrl_forward, HIGH);
+                analogWrite(left_pwm, speedv);
+                break;
+            case -1:
+                digitalWrite(left_ctrl_forward, LOW);
+                analogWrite(left_pwm, speedr);
+                break;
+            case 0:
+                digitalWrite(left_ctrl_forward, LOW);
+                analogWrite(left_pwm, 0);
+                break;
         }
+
+        switch (rr) 
+        {
+            case 1:
+                digitalWrite(right_ctrl_forward, HIGH);
+                analogWrite(right_pwm, speedv);
+                break;
+            case -1:
+                digitalWrite(right_ctrl_forward, LOW);
+                analogWrite(right_pwm, speedr);
+                break;
+            case 0:
+                digitalWrite(right_ctrl_forward, LOW);
+                analogWrite(right_pwm, 0);
+                break;
+        }
+
+        driveStateChanged = false;
+
     }
 }
