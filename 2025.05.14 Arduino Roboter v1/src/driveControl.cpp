@@ -18,19 +18,19 @@ void setupDC()
     pinMode(right_pwm, OUTPUT);
 }
 
-void driveControl(int rl, int rr)
+void driveControl()
 {
     if (millis() - lastCommandTime > 200) 
     {
-        rl = 0;
-        rr = 0;
+        richtungl = 0;
+        richtungr = 0;
         driveStateChanged = true;
     }
 
     if (motorEnabled  && driveStateChanged)
     {
 
-        switch (rl) 
+        switch (richtungl) 
         {
             case 1:
                 digitalWrite(left_ctrl_forward, HIGH);
@@ -46,7 +46,7 @@ void driveControl(int rl, int rr)
                 break;
         }
 
-        switch (rr) 
+        switch (richtungr) 
         {
             case 1:
                 digitalWrite(right_ctrl_forward, HIGH);

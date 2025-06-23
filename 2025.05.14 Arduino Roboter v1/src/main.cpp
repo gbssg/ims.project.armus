@@ -2,7 +2,6 @@
 #include "driveControl.h"
 #include "irCodeMotorTranslator.h"
 #include "usDistanceStop.h"
-#include "variablen.h"
 #include "lineFollower.h"
 
 void setup() 
@@ -18,7 +17,7 @@ void loop()
 {
     irCodeMotorTranslator();
     usDistanceCheck();
-    driveControl(richtungl, richtungr);
+    driveControl();
     lineFollower();
     delay(5);
 }

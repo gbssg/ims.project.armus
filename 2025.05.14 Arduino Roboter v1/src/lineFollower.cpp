@@ -12,8 +12,8 @@ const int right_ctrl_forward = 4;
 const int left_pwm = 5;
 const int right_pwm = 6;
 
-const int speedv = 155; // original value: 105 
-const int speedr = 100; //original value 150
+const int speedv = 155;
+const int speedr = 100;
 
 int val_L;
 int val_M; 
@@ -75,7 +75,9 @@ void lineFollower()
         val_L = digitalRead(pin_L);
         val_M = digitalRead(pin_M);
         val_R = digitalRead(pin_R);
+
         Serial.println(distance);
+        
         if (distance >= 8)
         {
             if (val_L == 1 && val_R == 0)

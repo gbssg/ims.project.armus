@@ -4,5 +4,5 @@
 #include "variablen.h"
 
 void setupDC();
-void driveControl(int rl, int rr);
+void driveControl();
 #endif

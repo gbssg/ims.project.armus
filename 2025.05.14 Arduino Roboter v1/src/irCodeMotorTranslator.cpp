@@ -18,7 +18,6 @@ void irCodeMotorTranslator()
     if (IrReceiver.decode())
     {
         IrReceiver.resume();
-
         driveStateChanged = true;
         lastCommandTime = millis();
 
@@ -61,7 +60,6 @@ void irCodeMotorTranslator()
 
         if (IrReceiver.decodedIRData.flags & IRDATA_FLAGS_IS_REPEAT)
         {
-        // Erkennt IR Signal Wiederholung
         driveStateChanged = true;
         Serial.println("Wiederholung vom IR Code");
         }
