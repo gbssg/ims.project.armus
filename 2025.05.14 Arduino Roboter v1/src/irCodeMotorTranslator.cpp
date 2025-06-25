@@ -47,25 +47,45 @@ void irCodeMotorTranslator()
         case 66:
             if (millis() - letzerModusWechsel66 >= 500)
             {
-                sonarEnabled = false;
-                motorEnabled = !motorEnabled; // ändert den Motorstatus
-                digitalWrite(LEDPIN, !motorEnabled); 
+                motorEnabled = !motorEnabled; // ändert den Motorstatus 
                 letzerModusWechsel66 = millis();
                 Serial.println("66");
+                if (motorEnabled)
+                {
+                    digitalWrite(LEDPIN, LOW);
+                    sonarEnabled = false;
+                }
+                else
+                {
+                    digitalWrite(LEDPIN, HIGH);
+                    sonarEnabled = false;
+                }
             }
             break;
         case 74:
         if (millis() - letzerModusWechsel74 >= 500)
             {
-                motorEnabled = false;
                 sonarEnabled = !sonarEnabled; // ändert den Sonarstatus
                 digitalWrite(LEDPIN, LOW); 
                 letzerModusWechsel74 = millis();
                 Serial.println("74");
+                if (!sonarEnabled)
+                {
+                    digitalWrite(LEDPIN, LOW);
+                    motorEnabled = true;
+                }
+                else
+                {
+                    delay(300);
+                    digitalWrite(LEDPIN, LOW);
+                    motorEnabled = false;
+                }
             }
-
             break;
         default:
+            motorEnabled = true;
+            sonarEnabled = false;
+            
             // Stop
             richtungl = 0;
             richtungr = 0;
@@ -74,8 +94,11 @@ void irCodeMotorTranslator()
 
         if (IrReceiver.decodedIRData.flags & IRDATA_FLAGS_IS_REPEAT)
         {
-        driveStateChanged = true;
-        Serial.println("Wiederholung vom IR Code");
+            if (IrReceiver.decodedIRData.command != 74)
+            {
+                driveStateChanged = true;
+                Serial.println("Wiederholung vom IR Code");
+            }
         }
     }
 }

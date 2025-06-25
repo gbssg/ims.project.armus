@@ -3,6 +3,7 @@
 #include "irCodeMotorTranslator.h"
 #include "usDistanceStop.h"
 #include "lineFollower.h"
+#include "sonar.h"
 
 void setup() 
 {
@@ -11,6 +12,7 @@ void setup()
     setupDC();
     setupUS();
     setupLF();
+    setupSonar();
 }
 
 void loop()
@@ -19,5 +21,6 @@ void loop()
     usDistanceCheck();
     driveControl();
     lineFollower();
+    sonar();
     delay(5);
 }

@@ -16,6 +16,8 @@ void setupDC()
     pinMode(right_ctrl_forward, OUTPUT);
     pinMode(left_pwm, OUTPUT);
     pinMode(right_pwm, OUTPUT);
+    driveStateChanged = true;
+    motorEnabled = true;
 }
 
 void driveControl()
@@ -25,6 +27,13 @@ void driveControl()
         richtungl = 0;
         richtungr = 0;
         driveStateChanged = true;
+    }
+    if (sonarEnabled)
+    {
+        digitalWrite(left_ctrl_forward, LOW);
+        analogWrite(left_pwm, 0);
+        digitalWrite(right_ctrl_forward, LOW);
+        analogWrite(right_pwm, 0);
     }
 
     if (motorEnabled  && driveStateChanged  && !sonarEnabled)
