@@ -27,7 +27,7 @@ void driveControl()
         driveStateChanged = true;
     }
 
-    if (motorEnabled  && driveStateChanged)
+    if (motorEnabled  && driveStateChanged  && !sonarEnabled)
     {
 
         switch (richtungl) 

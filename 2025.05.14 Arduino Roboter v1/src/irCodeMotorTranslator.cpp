@@ -4,7 +4,8 @@
 
 #define LEDPIN 9  
 
-unsigned long letzerModusWechsel = millis();
+unsigned long letzerModusWechsel66 = millis();
+unsigned long letzerModusWechsel74 = millis();
 
 void setupIrCMT()
 {
@@ -44,12 +45,25 @@ void irCodeMotorTranslator()
             richtungr = -1;
             break;
         case 66:
-            if (millis() - letzerModusWechsel >= 500)
+            if (millis() - letzerModusWechsel66 >= 500)
             {
+                sonarEnabled = false;
                 motorEnabled = !motorEnabled; // ändert den Motorstatus
                 digitalWrite(LEDPIN, !motorEnabled); 
-                letzerModusWechsel = millis();
+                letzerModusWechsel66 = millis();
+                Serial.println("66");
             }
+            break;
+        case 74:
+        if (millis() - letzerModusWechsel74 >= 500)
+            {
+                motorEnabled = false;
+                sonarEnabled = !sonarEnabled; // ändert den Sonarstatus
+                digitalWrite(LEDPIN, LOW); 
+                letzerModusWechsel74 = millis();
+                Serial.println("74");
+            }
+
             break;
         default:
             // Stop

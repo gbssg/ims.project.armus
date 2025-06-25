@@ -70,7 +70,7 @@ void setupLF()
 
 void lineFollower()
 {
-    if (!motorEnabled) // Ich verwende dieselbe Variable wie in driveControl weil linefollower und drivecontrol nicht gleichzeitig laufen sollen
+    if (!motorEnabled && !sonarEnabled) // Ich verwende dieselbe Variable wie in driveControl weil linefollower und drivecontrol nicht gleichzeitig laufen sollen
     {
         val_L = digitalRead(pin_L);
         val_M = digitalRead(pin_M);
